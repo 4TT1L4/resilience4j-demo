@@ -3,7 +3,6 @@ package ch.bujaki.resilience4jdemo;
 import java.time.Duration;
 import java.util.function.Supplier;
 
-
 import org.junit.jupiter.api.Test;
 
 import io.github.resilience4j.retry.Retry;

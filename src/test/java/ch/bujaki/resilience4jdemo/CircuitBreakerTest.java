@@ -27,16 +27,16 @@ public class CircuitBreakerTest {
 	@Test
 	public void test_failingService_withCircuitBreaker() throws InterruptedException {
 		CircuitBreakerConfig config = CircuitBreakerConfig.custom()
-		  .failureRateThreshold(50) // per cent!
-		  .slowCallRateThreshold(50) // per cent!
-		  .waitDurationInOpenState(Duration.ofMillis(5000))
-		  .slowCallDurationThreshold(Duration.ofMillis(100))
-		  .permittedNumberOfCallsInHalfOpenState(1)
-		  .minimumNumberOfCalls(3)
-		  .slidingWindowType(SlidingWindowType.COUNT_BASED)
-		  .slidingWindowSize(2)
-		  .ignoreExceptions(BusinessException.class)
-		  .build();
+			.minimumNumberOfCalls(2) // in current sliding-window for calculation
+			.slidingWindowType(SlidingWindowType.COUNT_BASED)
+			.slidingWindowSize(2)
+			.failureRateThreshold(50) // per cent
+			.slowCallRateThreshold(50) // per cent
+			.slowCallDurationThreshold(Duration.ofMillis(100))
+			.waitDurationInOpenState(Duration.ofMillis(5000))
+			.permittedNumberOfCallsInHalfOpenState(1)
+			.ignoreExceptions(BusinessException.class)
+			.build();
 
 		CircuitBreaker circuitBreaker = CircuitBreakerRegistry.of(config)
 		  .circuitBreaker("name", config);
