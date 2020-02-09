@@ -40,7 +40,6 @@ public class ReplyTest {
 			System.out.println(decorated.get());
 		}
 	}
-
 }
 
 
