@@ -16,7 +16,7 @@ public class ReplyTest {
 	public void test_unreliableService() {
 		Supplier<Response> supplier = new UnreliableService();
 		
-		for (int i=0; i<20; i++) {
+		for (int i=0; i<10; i++) {
 			System.out.println(supplier.get());
 		}
 	}
@@ -25,7 +25,7 @@ public class ReplyTest {
 	public void test_unreliableService_withRetry() {
 		RetryConfig config = RetryConfig.<Response>custom()
 				.maxAttempts(2)
-				.waitDuration(Duration.ofMillis(350))
+				.waitDuration(Duration.ofMillis(500))
 				.retryOnResult(Response::hasFailed)
 				.build();
 		
@@ -33,11 +33,20 @@ public class ReplyTest {
 			RetryRegistry.of(config).retry("custom");
 		
 		Supplier<Response> supplier = new UnreliableService();
-		Supplier<Response> decoratedSuplier = Retry.decorateSupplier(retryWithCustomConfig, supplier);
+		Supplier<Response> decorated = 
+				Retry.decorateSupplier(retryWithCustomConfig, supplier);
 		
-		for (int j =0; j<20; j++) {
-			System.out.println(decoratedSuplier.get());
+		for (int j =0; j<10; j++) {
+			System.out.println(decorated.get());
 		}
 	}
 
 }
+
+
+
+
+
+
+
+
