@@ -16,7 +16,7 @@ public class ReplyTest {
 	public void test_unreliableService() {
 		Supplier<Response> supplier = new UnreliableService();
 		
-		for (int j =0; j<20; j++) {
+		for (int i=0; i<20; i++) {
 			System.out.println(supplier.get());
 		}
 	}
