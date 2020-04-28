@@ -1,6 +1,6 @@
 # resilience4j-demo
 
-Example code for my talk _Building robust and fault tolerant Java applications in functional style_ at the GDEV2020 conference.
+This repository contains the code examples for my talk _Building robust and fault tolerant Java applications in functional style_, that was presented at the GDEV2020 conference.
 
 # Slides
 
